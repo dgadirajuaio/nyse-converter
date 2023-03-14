@@ -6,7 +6,7 @@ from dask import dataframe as dd
 
 def main():
     logging.basicConfig(
-        filename='logs/nc.log',
+        filename='logs/ffc.log',
         level=logging.INFO,
         format='%(levelname)s %(asctime)s %(message)s',
         datefmt='%Y-%m-%d %I:%M:%S %p'
