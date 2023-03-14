@@ -1,10 +1,17 @@
 import os
 import glob
+import logging
 from dask import dataframe as dd
 
 
 def main():
-    print('File format conversion started')
+    logging.basicConfig(
+        filename='logs/ffc.log',
+        level=logging.INFO,
+        format='%(levelname)s %(asctime)s %(message)s',
+        datefmt='%Y-%m-%d %I:%M:%S %p'
+    )
+    logging.info('File format conversion started')
     src_dir = os.environ['SRC_DIR']
     src_file_pattern = os.environ.setdefault('SRC_FILE_PATTERN', 'NYSE*.txt.gz')
     # tgt_dir = os.environ['TGT_DIR']
@@ -19,14 +26,14 @@ def main():
                'high_price', 'close_price', 'volume'],
         blocksize=None
     )
-    print('Data Frame is created and will be written in JSON format')
+    logging.info('Data Frame is created and will be written in JSON format')
     df.to_json(
         tgt_file_names,
         orient='records',
         lines=True,
         compression='gzip'
     )
-    print('File format conversion completed')
+    logging.info('File format conversion completed')
 
 
 if __name__ == '__main__':
