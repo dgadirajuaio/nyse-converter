@@ -5,14 +5,15 @@ from dask import dataframe as dd
 
 
 def main():
+    log_file_path = os.environ['LOG_FILE_PATH']
+    src_dir = os.environ['SRC_DIR']
     logging.basicConfig(
-        filename='logs/nc.log',
+        filename=log_file_path,
         level=logging.INFO,
         format='%(levelname)s %(asctime)s %(message)s',
         datefmt='%Y-%m-%d %I:%M:%S %p'
     )
     logging.info('File format conversion started')
-    src_dir = os.environ['SRC_DIR']
     src_file_pattern = os.environ.setdefault('SRC_FILE_PATTERN', 'NYSE*.txt.gz')
     # tgt_dir = os.environ['TGT_DIR']
     src_file_names = sorted(glob.glob(f'{src_dir}/{src_file_pattern}'))
